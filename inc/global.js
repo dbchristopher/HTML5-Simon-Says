@@ -1,5 +1,11 @@
 var loader = new widgets.Loader({ message: "Downloading: 0%" });
 
+/*
+	NEXT: 
+		make it log keystroke
+		add instructions to use keys 1-5
+*/
+
 (function() { "use strict";
 	// REMOVE BLANK CHARS FROM BEGINNING AND END OF STRING
 	String.prototype.trim = function () {
@@ -33,6 +39,14 @@ var loader = new widgets.Loader({ message: "Downloading: 0%" });
 			Event.add(reset, 'click', this.reset() );
 			Event.add(start, 'click', this.reset() );
 			this.setDefault();
+			Event.add(window, 'keydown', function(event) {
+
+				var code = event.keyCode - 49;
+				if(code >= 48) code -= 48;
+				if(code >= 0 && code <= 4) {
+					self.playSingle(INPUTS[ code ]);
+				}
+			} )
 		},
 
 		this.setDefault = function() { // set default values
