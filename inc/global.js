@@ -39,8 +39,8 @@ var loader = new widgets.Loader({ message: "Downloading: 0%" });
 			Event.add(reset, 'click', this.reset() );
 			Event.add(start, 'click', this.reset() );
 			this.setDefault();
+			// add keypress events
 			Event.add(window, 'keydown', function(event) {
-
 				var code = event.keyCode - 49;
 				if(code >= 48) code -= 48;
 				if(code >= 0 && code <= 4) {
