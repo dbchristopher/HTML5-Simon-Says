@@ -2,8 +2,8 @@ var loader = new widgets.Loader({ message: "Downloading: 0%" });
 
 /*
 	NEXT: 
-		- create youtube video of game
-		- submit to chrome experiments
+		- incorporate michael's browser detect?
+		- submit to google chrome web store
 
 */
 
