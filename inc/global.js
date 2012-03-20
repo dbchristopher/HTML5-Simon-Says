@@ -4,6 +4,9 @@ var loader = new widgets.Loader({ message: "Downloading: 0%" });
 	NEXT: 
 		make it log keystroke
 		add instructions to use keys 1-5
+		add the share dropdown from colrd
+		try with 3x3 grid for more advanced play
+		option: "cheat" and continue?
 */
 
 (function() { "use strict";
