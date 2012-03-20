@@ -31,7 +31,7 @@ var loader = new widgets.Loader({ message: "Downloading: 0%" });
 				start = document.getElementById('start');
 			// connect color to sound
 			for (var i = 0; i < INPUTS.length; i++) {
-				Event.add(INPUTS[i], 'mousedown', this.clickSingle(INPUTS[i]) );
+				Event.add(INPUTS[i], 'mousedown', function(event) { SELF.inputSingle(event.target); } );
 			}
 			document.getElementById('intro').className = 'active';
 			reset.onclick = function() { return false };
@@ -39,7 +39,15 @@ var loader = new widgets.Loader({ message: "Downloading: 0%" });
 			Event.add(reset, 'click', this.reset() );
 			Event.add(start, 'click', this.reset() );
 			// add keypress events
-			Event.add(window, 'keydown', this.keySingle(event) );
+			Event.add(window, 'keydown', function(event) {
+				var code = event.keyCode - 49;
+				if(code >= 48) code -= 48; // adjust for 10-key pad
+				if(code >= 0 && code <= 4) {
+					var el = INPUTS[ code ];
+					SELF.inputSingle(el);
+				}
+				
+			});
 		}
 
 		this.reset = function () { // start/restart game
@@ -58,27 +66,21 @@ var loader = new widgets.Loader({ message: "Downloading: 0%" });
 			RESPONSE = [];
 		}
 
-		this.keySingle = function(event) {
-			return function(event) {
-				if( LISTEN === true ) {
-					var code = event.keyCode - 49;
-					if(code >= 48) code -= 48; // adjust for 10-key pad
-					if(code >= 0 && code <= 4) {
-						var el = INPUTS[ code ];
-						SELF.playSingle(el);
-						SELF.record(el)
-					}
-				}
-			}
+		this.inputSingle = function(el) {
+			if(LISTEN === true ) { 
+				SELF.playSingle(el);
+				SELF.record(el);
+			} 
 		}
 
-		this.clickSingle = function(el) {
-			return function() { 
-				if(LISTEN === true ) { 
-					SELF.playSingle(el);
-					SELF.record(el);
-				} 
-			}
+		this.playSingle = function (el) { // play a color/note
+			var note = el.id.replace('col','') - 1;
+			el.className = 'active';
+			MIDI.noteOn(0, NOTES[note], 127, 0);
+			setTimeout(function() { // turn off color
+				MIDI.noteOff(0, note, 0);
+				el.className = '';
+			}, SPEED);
 		}
 
  		this.record = function ( el ) {
@@ -129,17 +131,6 @@ var loader = new widgets.Loader({ message: "Downloading: 0%" });
 				})(); // end recursion
 			}, SPACING);
  		}
-
-
-		this.playSingle = function (el) { // play a color/note
-			var note = el.id.replace('col','') - 1;
-			el.className = 'active';
-			MIDI.noteOn(0, NOTES[note], 127, 0);
-			setTimeout(function() { // turn off color
-				MIDI.noteOff(0, note, 0);
-				el.className = '';
-			}, SPEED);
-		},
 
 		this.playPattern = function() { // playback a pattern
 			var next = Math.random() * INPUTS.length >> 0,
