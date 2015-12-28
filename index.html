@@ -6,39 +6,26 @@
 	<META NAME="description" CONTENT="Simon says simulator. Enjoy a free memory game in your browser.">
 	<META NAME="keywords" CONTENT="game, color, memory, sound">
 
+	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, initial-scale=1.0">
+  	<meta name="apple-mobile-web-app-capable" content="yes" />
+
 	<link rel="stylesheet" href="inc/style.css" type="text/css" media="screen" />
 
 	<!--[if IE 9]>
 		<link rel="stylesheet" type="text/css" href="http://local.colrd/inc/css/ie9.css?v=1327094253" media="screen">
 	<![endif]-->
 
-	<link rel="shortcut icon" href="http://local.colrd/inc/css/images/media/favicon.png" />
 	<meta http-equiv="X-UA-Compatible" content="chrome=1">
-	<script type="text/javascript">
-	  var _gaq = _gaq || [];
-	  _gaq.push(['_setAccount', 'UA-51448-10']);
-	  _gaq.push(['_setDomainName', 'uxmonk.com']);
-	  _gaq.push(['_trackPageview']);
-	  (function() {
-	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	  })();
-	</script>
 </head>
 <body>
-	<a href="http://uxmonk.com" id="backToMonk">&laquo; UX Monk</a>
 
 	<div id="intro">
 		<h1>Simon Says</h1>
-		<p class="subnote">Inspired by <a href="http://www.youtube.com/watch?v=KVzZVYtt64I">Simon</a>&trade;</p>
 		<div class="bodyContent">
 			<p>I'll play a melody, and you play it back. Ready?</p>
-			<div class="controls"></div>
 			<a href="#" id="start" class="button">Start!</a>
-			
+			<p class="info visible-desktop">Controls: touch, click, or numeric keys 1 – 5.</p>
 		</div>
-		
 	</div>
 
 	<div id="content">
@@ -50,25 +37,31 @@
 	</div>
 
 	<div id="endScreen">
-		<h2>GREAT WORK!</h2>
-		Final score: <span id="finalScore">0</span>
-		<a href="#" id="reset" class="button">Reset</a>
+		<div class="content">
+			<h2>GREAT WORK!</h2>
+			Final score: <span id="finalScore">0</span>
+			<a href="#" id="reset" class="button">Play Again!</a>
+		</div>
 	</div>
 
 	<div id="ctrl">
-		<div class="topbar"></div>
 		<div id="score"><span class="title">Score:</span> <span id="scoreNumber">0</span></div>
 	</div>
-	<script type="text/javascript" src="inc/Event.js"></script>
-	<script type="text/javascript" src="inc/Loader.js"></script>
-	<script type="text/javascript" src="inc/MIDI.js/js/DOMLoader.script.js"></script>
-	<script type="text/javascript" src="inc/MIDI.js/js/DOMLoader.XMLHttp.js"></script>
-	<script type="text/javascript" src="inc/MIDI.js/js/MIDI.Player.js"></script>
-	<script type="text/javascript" src="inc/MIDI.js/js/MIDI.Plugin.js"></script>
-	<script type="text/javascript" src="inc/MIDI.js/js/MIDI.audioDetect.js"></script>
-	<script type="text/javascript" src="inc/MIDI.js/js/MIDI.loadPlugin.js"></script>
-	<script type="text/javascript" src="inc/global.js?date=2012-03-20"></script>
-	<script src="inc/MIDI.js/js/VersionControl.Base64.js" type="text/javascript"></script>
- 	<script src="inc/MIDI.js/js/lib/base64binary.js" type="text/javascript"></script>
+
+	<script src="inc/MIDI.js/js/Widgets/Loader.js" type="text/javascript"></script>
+	<script src="inc/MIDI.js/js/MIDI/AudioDetect.js" type="text/javascript"></script>
+	<script src="inc/MIDI.js/js/MIDI/LoadPlugin.js" type="text/javascript"></script>
+	<script src="inc/MIDI.js/js/MIDI/Plugin.js" type="text/javascript"></script>
+	<script src="inc/MIDI.js/js/MIDI/Player.js" type="text/javascript"></script>
+	<script src="inc/MIDI.js/js/Window/DOMLoader.XMLHttp.js" type="text/javascript"></script>
+	<script src="inc/MIDI.js/js/Window/Event.js" type="text/javascript"></script>
+	<script src="inc/MIDI.js/js/Window/DOMLoader.script.js" type="text/javascript"></script>
+	<!-- extras -->
+	<script src="inc/MIDI.js/inc/WebMIDIAPI.js" type="text/javascript"></script>
+	<script src="inc/MIDI.js/inc/Base64.js" type="text/javascript"></script>
+	<script src="inc/MIDI.js/inc/base64binary.js" type="text/javascript"></script>
+
+
+	<script type="text/javascript" src="inc/simon_says.js"></script
 </body>
 </html>
